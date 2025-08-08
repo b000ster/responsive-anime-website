@@ -464,17 +464,25 @@ const seedData = [
   }
 ];
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(async () => {
+async function seedDatabase() {
+  try {
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('MongoDB connected for seeding!');
+
     await Anime.deleteMany({});
+    console.log('Old anime data cleared.');
+
     await Anime.insertMany(seedData);
     console.log(`${seedData.length} anime seeded successfully.`);
-    mongoose.disconnect();
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error('Seeding error:', err);
-  });
+  } finally {
+    await mongoose.disconnect();
+    console.log('MongoDB connection closed.');
+  }
+}
+
+seedDatabase();
