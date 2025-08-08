@@ -5,7 +5,6 @@ const Anime = require('./models/Anime');
 
 const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/responsiveAnimeDB';
 
-
 const seedData = [
   // ============= 6 FEATURED / BANNERS =============
   {
