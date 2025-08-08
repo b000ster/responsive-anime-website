@@ -1,0 +1,24 @@
+# Node.js dependencies
+/backend/node_modules
+/frontend/node_modules
+
+# Build output
+/frontend/build
+
+# Environment variable files
+/backend/.env
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS junk files
+.DS_Store
+
+# VS Code settings (optional)
+.vscode/
