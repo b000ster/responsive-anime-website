@@ -18,7 +18,11 @@ function BannerCarousel({ banners }) {
       <div className="banner-info">
         <h1>{banner.title}</h1>
         <p>{banner.description}</p>
-        <button className="banner-play btn btn-warning" onClick={() => alert(`${banner.title}\nThis is a demo website. No video playback.`)}>▶ Play</button>
+        <button
+          className="banner-play btn btn-warning"
+          onClick={() => alert(`${banner.title}\nThis is a demo website. No video playback.`)}>
+          ▶ Play
+        </button>
       </div>
       <div className="banner-dots">
         {banners.map((_, idx) => <span key={idx} className={`dot${idx === currentIndex ? " active" : ""}`} />)}
@@ -34,9 +38,14 @@ function App() {
   const menuRef = useRef(null);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/anime`)
+    // Use Vercel (or local) environment variable for the backend URL
+    const apiBase = process.env.REACT_APP_API_URL;
+    axios.get(`${apiBase}/api/anime`)
       .then(res => setAnimeList(res.data))
-      .catch(() => setAnimeList([]));
+      .catch(err => {
+        console.error("Failed to fetch anime:", err);
+        setAnimeList([]);
+      });
   }, []);
 
   useEffect(() => {
@@ -73,7 +82,7 @@ function App() {
   ].concat(
     allSections.map(sec => ({
       label: sec,
-      href: `#${sec.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+      href: `#${sec.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
     }))
   );
   const misplacedAnime = animeList.filter(a => !a.section);
