@@ -34,7 +34,7 @@ function App() {
   const menuRef = useRef(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/anime")
+    axios.get("https://responsive-anime-website.onrender.com/api/anime")
       .then(res => setAnimeList(res.data))
       .catch(() => setAnimeList([]));
   }, []);
